@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { RouteObject } from 'react-router';
 import SuspenseLoader from '../components/SuspenseLoader';
 import AuthLayout from '../layout/AuthLayout';
+import ForgotPassword from '../pages/auth/ForgotPassword';
 
 
 const Loadable = (Component: ElementType) => (props: any) =>
@@ -13,8 +14,8 @@ const Loadable = (Component: ElementType) => (props: any) =>
   );
 
 
-const LoginPage = Loadable(lazy(()=>import('../pages/LoginPage')));
-const RegisterPage = Loadable(lazy(()=>import('../pages/RegisterPage')));
+const LoginPage = Loadable(lazy(()=>import('../pages/auth/LoginPage')));
+const RegisterPage = Loadable(lazy(()=>import('../pages/auth/RegisterPage')));
 
 const router:RouteObject[] = [
   {
@@ -28,6 +29,10 @@ const router:RouteObject[] = [
       {
         path: "/register",
         element:<RegisterPage/>
+      },
+      {
+        path: "/forgotPassword",
+        element:<ForgotPassword/>
       },
     ]
   }
