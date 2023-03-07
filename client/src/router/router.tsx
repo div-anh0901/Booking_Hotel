@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { RouteObject } from 'react-router';
 import SuspenseLoader from '../components/SuspenseLoader';
 import AuthLayout from '../layout/AuthLayout';
-import ForgotPassword from '../pages/auth/ForgotPassword';
+import HomeLayout from '../layout/HomeLayout/HomeLayout';
 
 
 const Loadable = (Component: ElementType) => (props: any) =>
@@ -16,6 +16,9 @@ const Loadable = (Component: ElementType) => (props: any) =>
 
 const LoginPage = Loadable(lazy(()=>import('../pages/auth/LoginPage')));
 const RegisterPage = Loadable(lazy(()=>import('../pages/auth/RegisterPage')));
+const ForgotPassword = Loadable(lazy(()=>import('../pages/auth/ForgotPassword')));
+const HomePage = Loadable(lazy(()=>import('../pages/doashboard/Home')));
+
 
 const router:RouteObject[] = [
   {
@@ -35,6 +38,17 @@ const router:RouteObject[] = [
         element:<ForgotPassword/>
       },
     ]
+  },
+  {
+    path: "",
+    element: <HomeLayout/>,
+    children: [
+      {
+        path: "/home",
+        element: <HomePage/>
+      }
+    ]
+    
   }
 ];
 
