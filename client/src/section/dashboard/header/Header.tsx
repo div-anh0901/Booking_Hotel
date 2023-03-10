@@ -1,20 +1,36 @@
 import * as React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
+import {useLocation} from 'react-router-dom'
 import AdbIcon from '@mui/icons-material/Adb';
 import {MenuItem,Tooltip,Button,Avatar,Container,Menu,Typography,IconButton,Toolbar,AppBar,Box}from "@mui/material";
+import { LinkCustom } from '../../../components/custom-link/LinkCustom';
 
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = [
+  { 
+    page:  'Holels',
+    link: 'home'
+  }, {
+    page:  'Listing',
+    link: 'listing'
+  },{
+    page:  'Agent',
+    link: 'agent'
+  },{
+    page: 'Pricing',
+    link: 'pricing'
+  }];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 
 export default function Header() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  
+    const location = useLocation();
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
       setAnchorElNav(event.currentTarget);
     };
+
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
       setAnchorElUser(event.currentTarget);
     };
@@ -79,8 +95,12 @@ export default function Header() {
                   }}
                 >
                   {pages.map((page) => (
-                    <MenuItem key={page}  onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center" style={{color:"black"}}>{page}</Typography>
+                    <MenuItem key={page.page}  onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center" style={{color:"black"}}>
+                        <LinkCustom href={page.link}>
+                          {page.page}
+                        </LinkCustom>
+                       </Typography>
                     </MenuItem>
                   ))}
                 </Menu>
@@ -106,13 +126,15 @@ export default function Header() {
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {pages.map((page) => (
+                  <LinkCustom  key={page.link} href={page.link}>
                   <Button
-                    key={page}
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'black', display: 'block' }}
                   >
-                    {page}
+                      {page.page}
+                    
                   </Button>
+                  </LinkCustom>
                 ))}
               </Box>
     
