@@ -10,7 +10,7 @@ type Props = {
 export const StyledSliderItem = styled.div<Props>`
   margin: 0 ${(props) => props.slideMargin}px;
   transition: transform 500ms ease;
-  border-radius: 20px;
+  border-radius: 10px;
   cursor: pointer;
   width: 100%;
   height: 100%;
@@ -18,6 +18,7 @@ export const StyledSliderItem = styled.div<Props>`
   display: flex;
   transform: scale(1);
   user-select: none;
+  
 
   flex: 0 0
     calc(
@@ -28,7 +29,7 @@ export const StyledSliderItem = styled.div<Props>`
   img {
     height: 100%;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 10px;
     box-sizing: border-box;
   }
 

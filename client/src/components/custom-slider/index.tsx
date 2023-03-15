@@ -19,12 +19,16 @@ export default function SiderBar() {
 
   return (
     <>
+    <Box sx={{ width: "100%" }}>
+        <Typography variant='h4' sx={{margin : "30px 0px", fontFamily:'sans-serif'}} >
+          Explore Destinations
+        </Typography>
         <SliderContainer {...SliderProps}>
             {imageDataBanner.map((data,index) => (
               <PositionRelative key={index} className="">
                 <img src={ data.image } alt='character' />
-                <PositonAbsolute className='' top={0} >
-                  <Box sx={{backgroundColor: 'rgb(0, 0, 0, 0.7)', width:  "100%", color: "white"}}>
+                <PositonAbsolute className='' top={0} sx={{width:  "100%",height: "100%"}}>
+                  <Box sx={{backgroundColor: 'rgb(0, 0, 0, 0.5)', width:  "100%", height: "100%", color: "white" , display: "flex", alignItems:"center", justifyContent:"center",borderRadius:"10px"}}>
                       <Typography variant='h5'>{data.lable}</Typography>
                   </Box>
                     
@@ -33,6 +37,7 @@ export default function SiderBar() {
           ))}
         </SliderContainer>
 
+    </Box>
     </>
   )
 }

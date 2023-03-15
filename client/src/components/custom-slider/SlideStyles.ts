@@ -19,28 +19,29 @@ export const StyledSliderWrapper = styled.div<SliderWrapperProps>`
   overflow: hidden;
   position: relative;
   background: white;
-  width: 90%;
-  margin: 0 auto;
-  padding: ${(props) => (props.zoomFactor / props.visibleSlides) * 0.7 + '%'} 0;
-
+  width: 100%;
+  
   .button-wrapper {
     position: absolute;
     width: 55px;
     height: 100%;
     top: 0;
-    padding: ${(props) => props.zoomFactor / 7 + '%'} 0;
     box-sizing: border-box;
+    display:flex;
+    align-items:center;
   }
 
   .button {
     display: block;
-    background: rgb(0, 0, 0, 0.7);
+    background: rgb(252, 252, 252 , 0.7);
     border: 0;
-    top: 0;
+    display:flex;
+    align-items:center;
+    justify-content: center;
     width: 50px;
-    height: 100%;
-    color: #fff;
-    font-size: 3rem;
+    height: 50px;
+    color: #000;
+    font-size: 2rem;
     font-weight: 800;
     cursor: pointer;
     outline: none;
@@ -54,18 +55,17 @@ export const StyledSliderWrapper = styled.div<SliderWrapperProps>`
 
   .back {
     left: 0;
-    border-radius: 0 1.5vw 1.5vw 0;
+    border-radius:  50%;
   }
 
   .forward {
     right: 0;
-    border-radius: 1.5vw 0 0 1.5vw;
+    border-radius: 50%;
   }
 `;
 
 export const StyledSlider = styled.div<SliderProps>`
   display: flex;
-  padding: 0 55px;
   transition: transform ${(props) => props.pageTransition}ms ease;
 
   :hover ${StyledSliderItem} {
