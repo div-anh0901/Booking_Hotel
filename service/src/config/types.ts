@@ -5,6 +5,10 @@ export type CreateUserDetails = {
     username: string;
     password: string;
 };
+export type FindUserOptions = Partial<{
+    selectAll: boolean;
+}>;
+
 
 export type ValidateUserDetails = {
     email: string;

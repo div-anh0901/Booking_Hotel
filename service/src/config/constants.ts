@@ -1,8 +1,10 @@
 export enum Routes{
-  AUTH_CLIENT = 'auth_client',
+  AUTH = 'auth',
+  USERS= 'users'
 
 }
 
 export enum Service {
-    AUTH_CLIENT="AUTH_SERVICE_CLIENT"
+    AUTH="AUTH",
+    USERS="USERS"
 }

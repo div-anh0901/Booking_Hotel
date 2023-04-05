@@ -1,22 +1,29 @@
 import { Module } from '@nestjs/common';
+import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import AuthClientModule from './serviceProvider/auth/client/authClient.module';
-import entities from './settings/typeorms'
+import { AuthModule } from './serviceProvider/auth/auth.module';
+import { UsersModule } from './serviceProvider/users/users.module';
+import entities from './settings/typeorms';
+import { APP_GUARD } from '@nestjs/core';
 @Module({
   imports: [
-    AuthClientModule,
+    AuthModule,
+    UsersModule,
+     PassportModule.register({ session: true }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
+      type: "mysql",
+      host: "localhost",
       port: 3306,
-      username: 'root',
-      password: '',
-      database: 'hotels',
+      username: "root",
+      password: "",
+      database: "hotels",
       synchronize: true,
-      entities
+      entities,
+      // logging: true
     }),
   ],
   controllers: [],
-  providers: [],
+  providers: [
+  ]
 })
 export class AppModule {}
