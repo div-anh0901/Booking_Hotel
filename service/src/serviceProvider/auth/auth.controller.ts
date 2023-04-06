@@ -6,6 +6,9 @@ import { IUserService } from '../users/users';
 import { IAuthService } from './auth';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { AuthenticatedGuard, LocalAuthGuard } from './utils/Guards';
+import { Roles } from './utils/Roles';
+import { Role } from './dtos/role.num';
+import { RolesGuard } from './utils/Roles.Guards';
 
 
 @Controller(Routes.AUTH)
@@ -27,7 +30,8 @@ export  class AuthController{
     }
 
     @Get('status')
-    @UseGuards(AuthenticatedGuard)
+    @Roles(Role.ADMIN)
+    @UseGuards(AuthenticatedGuard,RolesGuard)
     status(@Req() req: Request, @Res() res: Response) {
         res.send(req.user);
     }

@@ -5,6 +5,8 @@ import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { LocalStrategy } from "./utils/LocalStrategy";
 import { SessionSerializer } from "./utils/SessionSerializer";
+import { RolesGuard } from "./utils/Roles.Guards";
+
 
 
 @Module({
@@ -13,6 +15,7 @@ import { SessionSerializer } from "./utils/SessionSerializer";
     providers:[
         LocalStrategy,
         SessionSerializer,
+        RolesGuard,
         {
         provide: Service.AUTH,
         useClass: AuthService
