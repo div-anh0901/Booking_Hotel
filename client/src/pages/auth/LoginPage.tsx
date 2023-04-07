@@ -12,13 +12,13 @@ import {
     Button
   } from '@mui/material';
 import authBackGround from '../../assets/auth-background.jpg';
-import { Image } from '@mui/icons-material';
-import Input from '@mui/material/Input';
+import  {useNavigate} from 'react-router-dom'
 import FormProvider from '../../components/hook-form/FormProvider';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RHFTextField } from '../../components/hook-form';
+import { postLoginUser } from '../../config/apiConfig';
 type FormValuesProps = {
   email: string;
   password: string;
@@ -29,6 +29,7 @@ export default function LoginPage() {
     email: '',
     password: '',
   };
+  const  navigate = useNavigate()
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().required('Email is required').email(),
@@ -47,8 +48,13 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = methods;
-  function onSubmit(data:  FormValuesProps){  
-    
+  async function onSubmit(data:  FormValuesProps){  
+    try {
+      await postLoginUser({email: data.email, password: data.password});
+      navigate('/home')
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -60,14 +66,14 @@ export default function LoginPage() {
             <Typography style={{marginBottom: "10px"}} variant='h6'>Please log into your account</Typography>
 
             <RHFTextField style={{marginBottom: "20px"}} name='email' id='email' label="Email Address" />
-            <RHFTextField style={{marginBottom: "20px"}} name='password' id='password' label="Password" />
+
+            <RHFTextField type='password' style={{marginBottom: "20px"}} name='password' id='password' label="Password" />
 
             <Stack  direction="row" alignItems="center" justifyContent="space-between"  >
                 <FormControlLabel control={<Switch defaultChecked />} label="Remember" />
                 <Link href="/forgotPassword" color="#2B89F9">
                     Forgot Password?
                 </Link>
-
             </Stack>
             <Button type='submit' variant="contained"  style={{marginTop:  "20px"}}>Login</Button>
           </Stack>

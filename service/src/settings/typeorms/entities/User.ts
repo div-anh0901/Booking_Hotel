@@ -1,3 +1,4 @@
+import { Role } from "src/serviceProvider/auth/dtos/role.num";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
@@ -13,7 +14,7 @@ export class User {
     @Column()
     email: string;
 
-    @Column()
+    @Column({default: Role.USER})
     role: string;
 
     @Column()

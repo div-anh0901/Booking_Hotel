@@ -1,25 +1,21 @@
 import React from 'react'
 import {  
     Grid,
-    FormControl,
-    InputLabel,
     Typography,
     Stack,
     Switch,
-    FormGroup,
     FormControlLabel,
     Link,
     Button
   } from '@mui/material';
 import authBackGround from '../../assets/auth-background.jpg';
-import { Image } from '@mui/icons-material';
-import Input from '@mui/material/Input';
-import {Google} from '@mui/icons-material';
 import FormProvider from '../../components/hook-form/FormProvider';
 import { useForm } from 'react-hook-form';
+import {useNavigate} from 'react-router';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RHFTextField } from '../../components/hook-form';
+import { postRegisterUser } from '../../config/apiConfig';
 type FormValuesProps = {
   email: string;
   username: string;
@@ -28,6 +24,8 @@ type FormValuesProps = {
   afterSubmit?: string;
 };
 export default function RegisterPage() {
+  const navigate = useNavigate();
+  
   const defaultValues = {
     email: '',
     username: '',
@@ -35,11 +33,12 @@ export default function RegisterPage() {
     cfpassword:''
   };
 
+
   const LoginSchema = Yup.object().shape({
-    username: Yup.string().required('Username is required').email(),
+    username: Yup.string().required('Username is required'),
     email: Yup.string().required('Email is required').email(),
     password: Yup.string().required('Password is required').min(6).max(15),
-    cfpassword: Yup.string().required('Password is required').min(6).max(15)
+    cfpassword: Yup.string().oneOf([Yup.ref('password')],"Password  must match")
   });
 
   const methods = useForm<FormValuesProps>({
@@ -54,8 +53,13 @@ export default function RegisterPage() {
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = methods;
-  function onSubmit(data:  FormValuesProps){  
-    
+  async function onSubmit(data:  FormValuesProps){  
+        try{
+          await postRegisterUser({username: data.username,email: data.email, password: data.password});
+          navigate('/login');
+        } catch(ex){
+          console.log(ex);
+        }    
   }
 
   return (
