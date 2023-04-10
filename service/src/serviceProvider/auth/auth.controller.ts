@@ -30,8 +30,9 @@ export  class AuthController{
     }
 
     @Get('status')
-    @Roles(Role.ADMIN)
-    @UseGuards(AuthenticatedGuard,RolesGuard)
+    // @Roles(Role.ADMIN)
+    // @UseGuards(AuthenticatedGuard,RolesGuard)
+    @UseGuards(AuthenticatedGuard)
     status(@Req() req: Request, @Res() res: Response) {
         res.send(req.user);
     }

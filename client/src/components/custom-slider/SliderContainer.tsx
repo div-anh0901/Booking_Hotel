@@ -39,7 +39,6 @@ const Slider: React.FC<SliderProps> = ({
   useEffect(() => {
     //@ts-ignore
     const resizeObserver = new ResizeObserver(entries => {
-      console.log(entries)
      setScrollSize(entries[0].contentRect.width);
     });
   

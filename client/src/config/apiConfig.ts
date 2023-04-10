@@ -9,5 +9,6 @@ const config: AxiosRequestConfig = { withCredentials: true };
 export const postRegisterUser = async(data:CreateUserParams)=> axiosClient.post('/auth/register',data,config);
 export const postLoginUser = async(data:LoginUserParams)=>axiosClient.post('/auth/login',data,config);
 
+export const getAuthUser = async()=> axiosClient.get('/auth/status',config);
 
 

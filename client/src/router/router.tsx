@@ -4,6 +4,7 @@ import { RouteObject } from 'react-router';
 import SuspenseLoader from '../components/SuspenseLoader';
 import AuthLayout from '../layout/AuthLayout';
 import HomeLayout from '../layout/HomeLayout/HomeLayout';
+import { AuthenticatedRoute } from '../components/authentication/AuthenticatedRoute';
 
 
 const Loadable = (Component: ElementType) => (props: any) =>
@@ -27,11 +28,15 @@ const router:RouteObject[] = [
     children:[
       {
         path: "/login",
-        element:<LoginPage/>
+        element:(
+            <LoginPage/>
+        ) 
       },
       {
         path: "/register",
-        element:<RegisterPage/>
+        element:(
+            <RegisterPage/>
+        )
       },
       {
         path: "/forgotPassword",
@@ -41,7 +46,11 @@ const router:RouteObject[] = [
   },
   {
     path: "",
-    element: <HomeLayout/>,
+    element: (
+    <AuthenticatedRoute>
+       <HomeLayout/>
+    </AuthenticatedRoute>
+   ),
     children: [
       {
         path: "/home",
