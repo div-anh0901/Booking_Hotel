@@ -5,10 +5,12 @@ import { AuthModule } from './serviceProvider/auth/auth.module';
 import { UsersModule } from './serviceProvider/users/users.module';
 import entities from './settings/typeorms';
 import { APP_GUARD } from '@nestjs/core';
+import { HotelModule } from './serviceProvider/hotels/hotel.controller';
 @Module({
   imports: [
     AuthModule,
     UsersModule,
+    HotelModule,
      PassportModule.register({ session: true }),
     TypeOrmModule.forRoot({
       type: "mysql",
